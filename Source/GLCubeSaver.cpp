@@ -396,9 +396,11 @@ void GLCubeConfig::MessageReceived(BMessage *msg)
 
 //*********************************************************************************************
 
-GLCubeView::GLCubeView(BRect frame, char *name, ulong resizingMode, ulong options, GLCubes *saver_in)
- : BGLView(frame, name, resizingMode, 0, options),
- 	saver (saver_in)
+GLCubeView::GLCubeView(BRect frame, char *name, ulong resizingMode,
+	ulong options, GLCubes *saver_in)
+	:
+	BGLView(frame, name, resizingMode, 0, options),
+	saver(saver_in)
 {
 	GLfloat light_ambient[] = {0.5, 0.5, 0.5, 1.0};
 		
