@@ -127,7 +127,7 @@ class GLCubeConfig : public BView
 class GLCubeView : public BGLView
 {
 	public:
-			GLCubeView(BRect r, char *name, ulong resizingMode, ulong options, GLCubes *saver);
+			GLCubeView(BRect r, const char *name, ulong resizingMode, ulong options, GLCubes *saver);
 	void	AttachedToWindow();
 	void	Draw();
 	void	Advance();
