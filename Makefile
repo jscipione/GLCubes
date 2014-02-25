@@ -2,9 +2,9 @@ NAME= GLCubeSaver
 TYPE= SHARED
 SRCS= Source/GLCubeSaver.cpp
 RSRCS= Resources/GLCubeSaver.rsrc
-LIBS= /boot/develop/lib/x86/libroot.so /boot/develop/lib/x86/libbe.so /boot/develop/lib/x86/libGL.so /boot/develop/lib/x86/libscreensaver.so /boot/develop/lib/x86/libGLU.so
+LIBS= /boot/system/develop/lib/libroot.so /boot/system/develop/lib/libbe.so /boot/system/develop/lib/libGL.so /boot/system/develop/lib/libscreensaver.so /boot/system/develop/lib/libGLU.so
 LIBPATHS=
-SYSTEM_INCLUDE_PATHS= /boot/develop/headers/be /boot/develop/headers/cpp /boot/develop/headers/posix /boot/home/config/include
+SYSTEM_INCLUDE_PATHS= /boot/system/develop/headers/be /boot/system/develop/headers/cpp /boot/system/develop/headers/posix
 LOCAL_INCLUDE_PATHS= Source Resources
 OPTIMIZE=NONE
 #	specify any preprocessor symbols to be defined.  The symbols will not
