@@ -1,5 +1,5 @@
 NAME=OpenGLCubes
-TARGETNAME=CubeSaver
+TARGETNAME=GLCubeSaver
 PLATFORM=Haiku
 SCM=git
 GROUP=Source
@@ -10,9 +10,8 @@ SOURCEFILE=Source/GLCubeSaver.h
 GROUP=Resources
 EXPANDGROUP=yes
 SOURCEFILE=Resources/GLCubeSaver.rsrc
-LOCALINCLUDE=
-LOCALINCLUDE=Libs
 LOCALINCLUDE=Source
+LOCALINCLUDE=Resources
 SYSTEMINCLUDE=/boot/develop/headers/be
 SYSTEMINCLUDE=/boot/develop/headers/cpp
 SYSTEMINCLUDE=/boot/develop/headers/posix
