@@ -1,7 +1,7 @@
-NAME= GLCubeSaver
+NAME= GLCubes
 TYPE= SHARED
-SRCS= Source/GLCubeSaver.cpp
-RSRCS= Resources/GLCubeSaver.rsrc
+SRCS= Source/GLCubes.cpp
+RSRCS= Resources/GLCubes.rsrc
 LIBS= /boot/system/develop/lib/libroot.so /boot/system/develop/lib/libbe.so /boot/system/develop/lib/libGL.so /boot/system/develop/lib/libscreensaver.so /boot/system/develop/lib/libGLU.so
 LIBPATHS=
 SYSTEM_INCLUDE_PATHS= /boot/system/develop/headers/be /boot/system/develop/headers/cpp /boot/system/develop/headers/posix

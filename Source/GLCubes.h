@@ -1,6 +1,6 @@
 //.---------------.
 //|               |
-//| GLCubeSaver.h |
+//| GLCubes.h     |
 //|               |
 //'---------------'
 
@@ -18,8 +18,7 @@ GLfloat white[] = {1.0, 1.0, 1.0, 1.0};
 
 //*********************************************************************************************
 
-class GLCubes : public BScreenSaver
-{
+class GLCubes : public BScreenSaver {
 	public:
 		GLCubes(BMessage *message, image_id image);
 
