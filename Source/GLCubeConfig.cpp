@@ -3,6 +3,7 @@
 #include "stdio.h"
 
 #include <CheckBox.h>
+#include <LayoutBuilder.h>
 #include <Menu.h>
 #include <MenuField.h>
 #include <MenuItem.h>
@@ -36,103 +37,52 @@ enum {
 
 
 GLCubeConfig::GLCubeConfig(BRect frame, GLCubes* saver_in)
-	:	BView(frame, "", B_FOLLOW_NONE, B_WILL_DRAW),
-		saver(saver_in)
+	:
+	BView(frame, B_EMPTY_STRING, B_FOLLOW_NONE, B_WILL_DRAW),
+	saver(saver_in),
+	fTitleLine1(new BStringView(B_EMPTY_STRING,
+		"OpenGL Cubes+ v0.9g")),
+	fTitleLine2(new BStringView(B_EMPTY_STRING,
+		"©1999-2000 Brad Leffler")),
+	fNumberOfObjectsSlider(new BSlider("cubes", "Number of Objects : ",
+		new BMessage(GLC_NUMBER_CUBES), 0, 50, B_HORIZONTAL)),
+	fRotationSpeedSlider(new BSlider("rotate", "Rotation Speed : ",
+		new BMessage(GLC_CUBE_SPIN), 0, 10, B_HORIZONTAL)),
+	menu(new BMenu(" Shapes ")),
+	shapes(new BMenuField("SelectPopUp", "Shape", menu)),
+	cube(new BMenuItem("Cube", new BMessage(GLC_CUBE))),
+	pyramid(new BMenuItem("Pyramid", new BMessage(GLC_PYRAMID))),
+	gem(new BMenuItem("Gem", new BMessage(GLC_GEM))),
+	diamond(new BMenuItem("Diamond", new BMessage(GLC_DIAMOND))),
+	nobounds(new BCheckBox("nobounds", "No Bounds",
+		new BMessage(GLC_NOBOUNDS))),
+	wireframe(new BCheckBox("wireframe", "Wireframe",
+		new BMessage(GLC_WIREFRAME))),
+	fountain(new BCheckBox("fountain", "Fountain",
+		new BMessage(GLC_FOUNTAIN))),
+	lights(new BCheckBox("lights", "Lights", new BMessage(GLC_LIGHTS))),
+	opaque(new BCheckBox("opaque", "Transparent", new BMessage(GLC_OPAQUE))),
+	solidcolor(new BCheckBox("solidcolor", "Solid Colors",
+		new BMessage(GLC_SOLID_COLOR))),
+	pulsate(new BCheckBox("pulsate", "Pulsate", new BMessage(GLC_PULSATE))),
+	collisions(new BCheckBox("collisions", "Collisions",
+		new BMessage(GLC_COLLISIONS)))
 {
-	AddChild(new BStringView(BRect(10, 0, 250, 12), B_EMPTY_STRING,
-		"OpenGL Cubes+ v0.9g"));
-	AddChild(new BStringView(BRect(14, 0, 250, 26), B_EMPTY_STRING,
-		"©1999-2000 Brad Leffler"));
-	
-	slider = new BSlider(BRect(10,35,240,80), "cubes", "Number of Objects : ",
-		new BMessage(GLC_NUMBER_CUBES), 0, 50, B_BLOCK_THUMB);
-	slider->SetHashMarks(B_HASH_MARKS_BOTTOM);
-	slider->SetLimitLabels("0", "50");
-	slider->SetValue(saver->numcubes);
-	slider->SetHashMarkCount(10);
-	AddChild(slider);
-	
-	rslider = new BSlider(BRect(10,83,240,128), "rotate", "Rotation Speed : ",
-		new BMessage(GLC_CUBE_SPIN), 0, 10, B_BLOCK_THUMB);
-	rslider->SetHashMarks(B_HASH_MARKS_BOTTOM);
-	rslider->SetLimitLabels("0", "10");
-	rslider->SetValue(saver->cubespin);
-	rslider->SetHashMarkCount(11);
-	AddChild(rslider);
+	fNumberOfObjectsSlider->SetHashMarks(B_HASH_MARKS_BOTTOM);
+	fNumberOfObjectsSlider->SetLimitLabels("0", "50");
+	fNumberOfObjectsSlider->SetValue(saver->numcubes);
+	fNumberOfObjectsSlider->SetHashMarkCount(10);
 
-	nobounds = new BCheckBox(BRect(10, 160, 100, 175), "nobounds", "No Bounds",
-		new BMessage(GLC_NOBOUNDS));
-	AddChild(nobounds);
-	if (saver->nobounds)
-		nobounds->SetValue(B_CONTROL_ON);	
+	fRotationSpeedSlider->SetHashMarks(B_HASH_MARKS_BOTTOM);
+	fRotationSpeedSlider->SetLimitLabels("0", "10");
+	fRotationSpeedSlider->SetValue(saver->cubespin);
+	fRotationSpeedSlider->SetHashMarkCount(11);
 
-	if (saver->fountain)
-		nobounds->SetEnabled(false);
-
-	wireframe = new BCheckBox(BRect(10, 177, 100, 192), "wireframe",
-		"Wireframe", new BMessage(GLC_WIREFRAME));
-	AddChild(wireframe);
-	if(saver->wireframe)
-		wireframe->SetValue(B_CONTROL_ON);
-		
-	fountain = new BCheckBox(BRect(10, 194, 100, 209), "fountain", "Fountain",
-		new BMessage(GLC_FOUNTAIN));
-	AddChild(fountain);
-	if(saver->fountain)
-		fountain->SetValue(B_CONTROL_ON);
-			
-	lights = new BCheckBox(BRect(10, 211, 100, 226), "lights", "Lights",
-		new BMessage(GLC_LIGHTS));
-	AddChild(lights);
-
-	if (saver->opaque) {
-		lights->SetValue(B_CONTROL_ON);
-		lights->SetEnabled(false);
-	}
-	if(saver->lights)
-		lights->SetValue(B_CONTROL_ON);
-		
-	opaque = new BCheckBox(BRect(10, 228, 100, 243), "opaque", "Transparent",
-		new BMessage(GLC_OPAQUE));
-	AddChild(opaque);
-	if (saver->opaque)
-		opaque->SetValue(B_CONTROL_ON);
-
-	solidcolor = new BCheckBox(BRect(120, 160, 220, 175), "solidcolor",
-		"Solid Colors", new BMessage(GLC_SOLID_COLOR));
-	AddChild(solidcolor);
-	solidcolor->SetEnabled(false);
-	if (saver->solidcolor)
-		solidcolor->SetValue(B_CONTROL_ON);
-
-	pulsate = new BCheckBox(BRect(120, 177, 220, 192), "pulsate", "Pulsate",
-		new BMessage(GLC_PULSATE));
-	AddChild(pulsate);
-	if (saver->pulsate)
-		pulsate->SetValue(B_CONTROL_ON);
-
-	collisions = new BCheckBox(BRect(120, 194, 220, 209), "collisions",
-		"Collisions", new BMessage(GLC_COLLISIONS));
-	AddChild(collisions);
-	if (saver->collisions)
-		collisions->SetValue(B_CONTROL_ON);
-	if (saver->fountain)
-		collisions->SetEnabled(false);
-
-	menu = new BMenu(" Shapes ");
-	BMenuField *shapes = new BMenuField(BRect(10,135,120,155), "SelectPopUp",
-		"Shape", menu);
-	shapes->SetDivider (35);
-	AddChild(shapes);
 	menu->SetRadioMode(true);
 	menu->SetLabelFromMarked(true);
-	cube = new BMenuItem("Cube", new BMessage(GLC_CUBE));
 	menu->AddItem(cube);
-	pyramid = new BMenuItem("Pyramid", new BMessage(GLC_PYRAMID));
 	menu->AddItem(pyramid);
-	gem = new BMenuItem("Gem", new BMessage(GLC_GEM));
 	menu->AddItem(gem);
-	diamond = new BMenuItem("Diamond", new BMessage(GLC_DIAMOND));
 	menu->AddItem(diamond);
 
 	if (saver->shape == 0)
@@ -143,6 +93,64 @@ GLCubeConfig::GLCubeConfig(BRect frame, GLCubes* saver_in)
 		gem->SetMarked(true);
 	else if (saver->shape == 3)
 		diamond->SetMarked(true);
+
+	if (saver->nobounds)
+		nobounds->SetValue(B_CONTROL_ON);
+
+	if (saver->fountain)
+		nobounds->SetEnabled(false);
+
+	if (saver->wireframe)
+		wireframe->SetValue(B_CONTROL_ON);
+
+	if(saver->fountain)
+		fountain->SetValue(B_CONTROL_ON);
+
+	if (saver->opaque) {
+		lights->SetValue(B_CONTROL_ON);
+		lights->SetEnabled(false);
+	}
+
+	if(saver->lights)
+		lights->SetValue(B_CONTROL_ON);
+
+	if (saver->opaque)
+		opaque->SetValue(B_CONTROL_ON);
+
+	solidcolor->SetEnabled(false);
+	if (saver->solidcolor)
+		solidcolor->SetValue(B_CONTROL_ON);
+
+	if (saver->pulsate)
+		pulsate->SetValue(B_CONTROL_ON);
+
+	if (saver->collisions)
+		collisions->SetValue(B_CONTROL_ON);
+
+	if (saver->fountain)
+		collisions->SetEnabled(false);
+
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
+		.Add(fTitleLine1)
+		.Add(fTitleLine2)
+		.AddStrut(B_USE_DEFAULT_SPACING)
+		.Add(fNumberOfObjectsSlider)
+		.AddStrut(B_USE_SMALL_SPACING)
+		.Add(fRotationSpeedSlider)
+		.AddStrut(B_USE_SMALL_SPACING)
+		.AddGroup(B_HORIZONTAL, B_USE_SMALL_SPACING)
+			.Add(shapes->CreateLabelLayoutItem())
+			.Add(shapes->CreateMenuBarLayoutItem())
+			.End()
+		.AddStrut(B_USE_SMALL_SPACING)
+		.AddGrid(B_USE_DEFAULT_SPACING, 0)
+			.Add(nobounds, 0, 0).Add(solidcolor, 1, 0)
+			.Add(wireframe, 0, 1).Add(pulsate, 1, 1)
+			.Add(fountain, 0, 2).Add(collisions, 1, 2)
+			.Add(lights, 0, 3).Add(opaque, 1, 3)
+			.End()
+		.SetInsets(B_USE_DEFAULT_SPACING)
+		.End();
 }
 
 
@@ -151,10 +159,10 @@ GLCubeConfig::AttachedToWindow()
 {
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
-	slider->SetTarget(this);
-	slider->Invoke(new BMessage(GLC_NUMBER_CUBES));
-	rslider->SetTarget(this);
-	rslider->Invoke(new BMessage(GLC_CUBE_SPIN));
+	fNumberOfObjectsSlider->SetTarget(this);
+	fNumberOfObjectsSlider->Invoke(new BMessage(GLC_NUMBER_CUBES));
+	fRotationSpeedSlider->SetTarget(this);
+	fRotationSpeedSlider->Invoke(new BMessage(GLC_CUBE_SPIN));
 	nobounds->SetTarget(this);
 	wireframe->SetTarget(this);
 	fountain->SetTarget(this);
@@ -172,20 +180,20 @@ GLCubeConfig::MessageReceived(BMessage* message)
 {	
 	char	label[30];
 	int32	value;
-	
+
 	switch(message->what) {
 		case GLC_NUMBER_CUBES:
-			value = slider->Value();
+			value = fNumberOfObjectsSlider->Value();
 			sprintf(label, "Number of Objects: %li", value);
-			slider->SetLabel(label);
-			saver->numcubes = slider->Value();
+			fNumberOfObjectsSlider->SetLabel(label);
+			saver->numcubes = fNumberOfObjectsSlider->Value();
 			break;			
 
 		case GLC_CUBE_SPIN:
-			value = rslider->Value();
+			value = fRotationSpeedSlider->Value();
 			sprintf(label, "Rotation Speed: %li", value);
-			rslider->SetLabel(label);
-			saver->cubespin = rslider->Value();
+			fRotationSpeedSlider->SetLabel(label);
+			saver->cubespin = fRotationSpeedSlider->Value();
 			break;
 
 		case GLC_NOBOUNDS:

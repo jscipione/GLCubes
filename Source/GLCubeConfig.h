@@ -10,6 +10,7 @@ class BMenu;
 class BMenuField;
 class BMenuItem;
 class BSlider;
+class BStringView;
 class GLCubes;
 
 class GLCubeConfig: public BView {
@@ -22,11 +23,19 @@ public:
 private:
 			GLCubes*			saver;
 
-			uint32				window_flags;
+			BStringView*		fTitleLine1;
+			BStringView*		fTitleLine2;
 
-			BSlider*			slider;
-			BSlider*			sslider;
-			BSlider*			rslider;
+			BSlider*			fNumberOfObjectsSlider;
+			BSlider*			fRotationSpeedSlider;
+
+			BMenu*				menu;
+			BMenuField*			shapes;
+			BMenuItem*			cube;
+			BMenuItem*			pyramid;
+			BMenuItem*			gem;
+			BMenuItem*			diamond;
+
 			BCheckBox*			nobounds;
 			BCheckBox*			wireframe;
 			BCheckBox*			fountain;
@@ -35,12 +44,6 @@ private:
 			BCheckBox*			solidcolor;
 			BCheckBox*			pulsate;
 			BCheckBox*			collisions;
-			BMenuField*			shapes;
-			BMenu*				menu;
-			BMenuItem*			cube;
-			BMenuItem*			pyramid;
-			BMenuItem*			gem;
-			BMenuItem*			diamond;
 };
 
 
