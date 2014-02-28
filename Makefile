@@ -1,6 +1,6 @@
 NAME= GLCubes
 TYPE= SHARED
-SRCS= Source/GLCubes.cpp
+SRCS= Source/GLCubes.cpp Source/GLCubeConfig.cpp Source/GLCubeView.cpp
 RSRCS= Resources/GLCubes.rsrc
 LIBS= /boot/system/develop/lib/libroot.so /boot/system/develop/lib/libbe.so /boot/system/develop/lib/libGL.so /boot/system/develop/lib/libscreensaver.so /boot/system/develop/lib/libGLU.so
 LIBPATHS=

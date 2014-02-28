@@ -1,35 +1,8 @@
+#ifndef GL_CUBES_H
+#define GL_CUBES_H
+
+
 #include <ScreenSaver.h>
-#include <View.h>
-
-
-GLfloat red[]    = {1.0, 0.0, 0.0, 1.0};
-GLfloat blue[]   = {0.0, 0.0, 1.0, 1.0};
-GLfloat green[]  = {0.0, 0.5, 0.0, 1.0};
-GLfloat purple[] = {1.0, 0.0, 1.0, 1.0};
-GLfloat orange[] = {1.0, 0.6, 0.0, 1.0};
-GLfloat yellow[] = {1.0, 1.0, 0.0, 1.0};
-GLfloat cyan[]   = {0.0, 0.75, 1.0, 1.0};
-GLfloat white[]  = {1.0, 1.0, 1.0, 1.0};
-
-
-enum {
-		GLC_NUMBER_CUBES	= 'numc',
-		GLC_CUBE_SIZE		= 'size',
-		GLC_CUBE_SPIN		= 'spin',
-		GLC_NOBOUNDS		= 'bnds',
-		GLC_WIREFRAME		= 'wire',
-		GLC_FOUNTAIN		= 'foun',
-		GLC_LIGHTS			= 'lite',
-		GLC_COLLISIONS		= 'bang',
-		GLC_OPAQUE			= 'glas',
-		GLC_SOLID_COLOR		= 'sold',
-		GLC_PULSATE			= 'puls',
-		GLC_CUBE			= 'cube',
-		GLC_PYRAMID			= 'pyra',
-		GLC_DIAMOND			= 'diam',
-		GLC_GEM				= 'jems',
-		GLC_SHAPES			= 'shap'
-};
 
 
 class GLCubes: public BScreenSaver {
@@ -48,8 +21,8 @@ public:
 
 private:
 	friend class GLCubeConfig;
-	friend class GLCubeView;	
-		
+	friend class GLCubeView;
+
 			GLCubeView*			viewport;
 
 			int32				numcubes;
@@ -66,67 +39,5 @@ private:
 			int32				shape;
 };
 
-class GLCubeConfig: public BView
-{
-public:
-								GLCubeConfig(BRect frame, GLCubes* saver);
 
-			void				AttachedToWindow();
-			void				MessageReceived(BMessage* message);
-
-private:
-			GLCubes*			saver;
-
-			uint32				window_flags;
-
-			BSlider*			slider;
-			BSlider*			sslider;
-			BSlider*			rslider;
-			BCheckBox*			nobounds;
-			BCheckBox*			wireframe;
-			BCheckBox*			fountain;
-			BCheckBox*			lights;
-			BCheckBox*			opaque;
-			BCheckBox*			solidcolor;
-			BCheckBox*			pulsate;
-			BCheckBox*			collisions;
-			BMenuField*			shapes;
-			BMenu*				menu;
-			BMenuItem*			cube;
-			BMenuItem*			pyramid;
-			BMenuItem*			gem;
-			BMenuItem*			diamond;
-};
-
-class GLCubeView: public BGLView
-{
-public:
-								GLCubeView(BRect frame, const char* name,
-									ulong resizingMode, ulong options,
-									GLCubes* saver);
-
-	virtual	void				AttachedToWindow();
-	virtual	void				Draw();
-	virtual	void				Advance();
-
-			GLfloat				xpos[51];
-			GLfloat				ypos[51];
-			GLfloat				xdir[51];
-			GLfloat				ydir[51];
-			GLfloat				xrot[51];
-			GLfloat				yrot[51];
-			GLfloat				size[51];
-
-private:
-			GLCubes*			saver;
-		
-			int					j;
-			float				scale[51];
-			GLint				numcubes;
-			float				cubesize;
-			GLint				cubespin;	
-			bool				nobounds;
-			bool				wireframe;
-		
-			BBitmap*			texture_bits;
-};
+#endif	// GL_CUBES_H
