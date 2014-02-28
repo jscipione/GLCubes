@@ -1,16 +1,15 @@
+# GLCubes+ v0.9g
+## by Brad Leffler
 
-OpenGL Cubes+ v0.9g
-by Brad Leffler
+Screen Saver that displays bouncing OpenGL® cubes on the screen.
 
+![GLCubes screenshot](https://raw.github.com/jscipione/GlCubes/master/GLCubes.png)
 
-Disclaimer
--------------------------
+### Disclaimer
 
 This screen saver module is still being tested and your mileage may vary. Basically it means that I'm not responsible if it breaks your computer, makes your woman leave you, kills your hamster or anything else bad that it's usage might cause.
 
-
-HISTORY
--------------------------
+### HISTORY
 
 8/16/2000 - v0.9g
  This version introduces new shape selections, hence the name 'upgrade' to GL Cubes+. The shape choices now include Pyramid, Gem and Diamond. And at long last, I have finally implemented a basic Collision option. It's a bit buggy at the moment, and while some collisions are perfect, other times the shapes  get tangled up in each other. 
@@ -34,23 +33,19 @@ Fixed checkboxes - No Bounds and Wireframe are functional now. Removed Collision
 Initial release. Tested on a few systems. So far it works fine with or without Be's experimental 3dfx hardware acceleration support.
 
 
-INSTALLATION
--------------------------
+### INSTALLATION
 
 Drag the module into folder labeled 'Drop Saver Here'
 Enjoy.
 
-If you can't do that then quit using a computer and go buy a Nintendo.. the old one.
+If you can't do that then quit using a computer and go buy a Nintendo… the old one.
 
 
-FUTURE
--------------------------
+### FUTURE
 
 Finish up collision option, possibly texture mapping, and whatever else I can think of.
 
-
-FEEDBACK
--------------------------
+### FEEDBACK
 
 Please report any bugs that you might find, and tell me what you think.  If for whatever reason, you did not receive the source please contact me.
 
