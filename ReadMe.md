@@ -5,6 +5,8 @@ Screen Saver that displays bouncing OpenGL® cubes on the screen.
 
 ![GLCubes screenshot](https://raw.github.com/jscipione/GlCubes/master/GLCubes.png)
 
+![GLCubes movie](https://raw.github.com/jscipione/GlCubes/master/GLCubes.gif)
+
 ### Disclaimer
 
 This screen saver module is still being tested and your mileage may vary. Basically it means that I'm not responsible if it breaks your computer, makes your woman leave you, kills your hamster or anything else bad that it's usage might cause.
