@@ -162,8 +162,10 @@ GLCubes::StopSaver()
 void
 GLCubes::DirectConnected(direct_buffer_info* info)
 {
-	viewport->DirectConnected(info);
-	viewport->EnableDirectMode(true);
+	if (viewport != NULL) {
+		viewport->DirectConnected(info);
+		viewport->EnableDirectMode(true);
+	}
 }
 
 
