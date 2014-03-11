@@ -383,15 +383,6 @@ GLCubeView::GLCubeView(BRect frame, const char* name, ulong resizingMode,
 
 
 void
-GLCubeView::AttachedToWindow()
-{
-	LockGL();
-	BGLView::AttachedToWindow();
-	UnlockGL();
-}
-
-
-void
 GLCubeView::Draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

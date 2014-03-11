@@ -14,7 +14,6 @@ public:
 									ulong resizingMode, ulong options,
 									GLCubes* saver);
 
-	virtual	void				AttachedToWindow();
 	virtual	void				Draw();
 	virtual	void				Advance();
 
