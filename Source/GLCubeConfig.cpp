@@ -48,12 +48,15 @@ GLCubeConfig::GLCubeConfig(BRect frame, GLCubes* saver_in)
 		new BMessage(GLC_NUMBER_CUBES), 0, 50, B_HORIZONTAL)),
 	fRotationSpeedSlider(new BSlider("rotate", "Rotation Speed : ",
 		new BMessage(GLC_CUBE_SPIN), 0, 10, B_HORIZONTAL)),
-	menu(new BMenu(" Shapes ")),
-	shapes(new BMenuField("SelectPopUp", "Shape", menu)),
+
+	menu(new BMenu("Shapes")),
+	shapes(new BMenuField("SelectPopUp", "Shape:", menu)),
+
 	cube(new BMenuItem("Cube", new BMessage(GLC_CUBE))),
 	pyramid(new BMenuItem("Pyramid", new BMessage(GLC_PYRAMID))),
 	gem(new BMenuItem("Gem", new BMessage(GLC_GEM))),
 	diamond(new BMenuItem("Diamond", new BMessage(GLC_DIAMOND))),
+
 	nobounds(new BCheckBox("nobounds", "No Bounds",
 		new BMessage(GLC_NOBOUNDS))),
 	wireframe(new BCheckBox("wireframe", "Wireframe",
