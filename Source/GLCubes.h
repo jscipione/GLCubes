@@ -5,6 +5,8 @@
 #include <ScreenSaver.h>
 
 
+class GLCubeView;
+
 class GLCubes: public BScreenSaver {
 public:
 								GLCubes(BMessage* message, image_id image);
